@@ -1,0 +1,42 @@
+.name{
+  font-weight: lighter;
+  font-size: 20px;
+}
+
+.symbol{
+  font-weight: lighter;
+}
+
+.price{
+  font-weight: bold;
+  color:darkblue
+}
+
+.volume{
+  font-weight: lighter;
+}
+
+.changeP{
+  font-weight: lighter;
+  color: red;
+  align-content: center;
+  
+}
+
+.changeM{
+  font-weight: lighter;
+  color: blue;
+  align-content: center;
+}
+
+.tableHead{
+  border: 1px solid black;
+}
+
+.main{
+  padding: 30px 50px 10px 50px;
+  align-items: center;
+  justify-content: center;
+
+  
+}
