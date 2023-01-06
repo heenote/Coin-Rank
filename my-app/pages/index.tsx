@@ -3,11 +3,13 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
 import {useEffect, useState} from 'react'
+import { useRouter } from 'next/router'
 export default function Home({data}: any) {
   const [value, setValue] = useState('')
   const [tableData, setTableData] = useState(data)
   const [TimerM,setTimerM] = useState(4)
   const [TimerS,setTimerS] = useState(59)
+  const router = useRouter();
   // useEffect(()=>{
   //  if(TimerM === 0 && TimerS === 2){
   //    fetch(`http://localhost:3000/api/get-coindata`)  //5분 주기로 업데이트 되는 거같다
@@ -102,7 +104,12 @@ export default function Home({data}: any) {
   <tbody style={{}}>
     {tableData.map((item : any)=>{
       return(
-    <tr key={item.uuid}>
+    <tr key={item.uuid} onClick={()=>{
+      router.push({
+        pathname: '/coinChart/[id]',
+        query: item.uuid
+      })
+    }}>
       <td scope="row" width={20} style={{fontWeight:'bold'}}>{item.rank}</td>
       <td scope="row" width={20} >
          <Image
