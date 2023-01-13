@@ -1,24 +1,24 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-const url = 'https://coinranking1.p.rapidapi.com/coins?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=24h&tiers%5B0%5D=1&orderBy=marketCap&orderDirection=desc&limit=100&offset=0';
-
 const options = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Key': `${process.env.API_KEY}`,
-    'X-RapidAPI-Host': `${process.env.API_LINK}`
-  }
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': `${process.env.API_KEY}`,
+		'X-RapidAPI-Host': `${process.env.API_LINK}`
+	}
 };
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
+    const {uuid} = req.query
    return new Promise<void>((resolve, rejects)=>{
        
-    fetch(url, options)
+    fetch(`https://coinranking1.p.rapidapi.com/coin/${uuid}/history?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=3h`, options)
        .then(res => res.json())
        .then(data => { res.json(data)
         resolve();
     })
        .catch(err =>{
            console.error('error:' + err)
+           
            resolve() 
        } 
        )
