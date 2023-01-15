@@ -186,7 +186,7 @@ export default function Home({data}: any) {
     </tr>
       )
     })}
-      
+           
   </tbody>
     </table>
     </div>
