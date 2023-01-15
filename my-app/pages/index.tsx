@@ -18,30 +18,30 @@ export default function Home({data}: any) {
    * 받아서 setTableData에 넘기면 table이 리렌더링되면서
    * CRS 환경에서 데이터가 변하기 떄문에 업데이트된 값만 바뀐다 
    */
-  // useEffect(()=>{
-  //    const load = setInterval(()=>{
-  //     if(TimerS !== 0)
-  //      setTimerS((previousCount) => previousCount - 1)
-  //     else{
-  //       setTimerM((previousCount) => previousCount - 1)
-  //       setTimerS(59) 
-  //     }
-  //    },1000)
-  //    return () =>{clearInterval(load)}
-  // },[TimerM, TimerS])
+  useEffect(()=>{
+     const load = setInterval(()=>{
+      if(TimerS !== 0)
+       setTimerS((previousCount) => previousCount - 1)
+      else{
+        setTimerM((previousCount) => previousCount - 1)
+        setTimerS(59) 
+      }
+     },1000)
+     return () =>{clearInterval(load)}
+  },[TimerM, TimerS])
 
-  // if(TimerM === 0 && TimerS === 1){
-  //   fetch(`http://localhost:3000/api/get-coindata`)  //5분 주기로 업데이트
-  //   .then(res => res.json())
-  //   .then(data =>{ 
-  //     setTableData(data.data.coins) 
-  //     console.log(data.data.coins)
-  //     setTimerM(5)
-  //    })
-  //    .catch((err: { toString: () => any })=>{
-  //      console.log(err.toString()) 
-  //     })
-  //   }
+  if(TimerM === 0 && TimerS === 1){
+    fetch(`http://localhost:3000/api/get-coindata`)  //5분 주기로 업데이트
+    .then(res => res.json())
+    .then(data =>{ 
+      setTableData(data.data.coins) 
+      console.log(data.data.coins)
+      setTimerM(5)
+     })
+     .catch((err: { toString: () => any })=>{
+       console.log(err.toString()) 
+      })
+    }
 
   // 코인 검색
   const onSubmit = (e: { preventDefault: () => void; }) =>{
