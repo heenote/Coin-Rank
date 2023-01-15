@@ -11,6 +11,8 @@ Show Top100 CoinRank and Chart
 ### 2-1 일정
 2023-01-12 ~ 
 ### 2-2 기술
-- Next.js , 
+- Next.js
+- React
+- TypeScript
 ### 2-3 기술 설명
 
