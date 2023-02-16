@@ -29,15 +29,6 @@ const ChartPage =({data}: any) => {
 const router = useRouter();
 console.log(data)
 
-  /**
-   * 버튼 onClick의 value값으로 들어갈 함수 
-   * 여기서 시간단위를 바꿔야함 (ex. 3h, 24h, 7d) 예시처럼 api에 들어가야함
-   * uuid는 코인들의 key값이라고 생각하면 됨 고유값임 이걸로 코인 찾으면됨
-   */
-   const changeList = () =>{
-     const res = axios(`http://localhost:3000/api/get-coinChartData?uuid=${router.query.uuid}`,  {responseType: 'json'})
-    }
-
       return (
         <div>
           <div style={{display: 'flex' ,marginBottom:'10px'}}>

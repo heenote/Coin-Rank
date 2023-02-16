@@ -7,6 +7,14 @@
   font-weight: lighter;
 }
 
+.grp{
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+.grp:hover{
+  color: #254cdd;
+}
 .price{
   font-weight: bold;
   color:darkblue
@@ -37,13 +45,25 @@
   size: 1.5rem;
   cursor: pointer;
   z-index: 2;
-  
   margin: auto;
+  
+}
+
+.star2{
+  size: 1.5rem;
+  cursor: pointer;
+  z-index: 2;
+  margin: auto;
+  color: yellow;
+  
 }
  .star:hover{
-  box-shadow: 1px 1px 3px 1px #dadce0;
-  margin: auto;
+ color: blue;
  }
+
+ .star2:hover{
+  color: blue;
+  }
 
 .main{
   padding: 30px 50px 10px 50px;
@@ -71,3 +91,47 @@
   font-weight: bold;
   text-align: center;
 }
+
+.sideWrap{
+  z-index: 5;
+  padding: 12px;
+  border-radius: 15px 0 0 15px;
+  background-color: #e7e4e1;
+  height: 100%;
+  width: 55%;
+  right: -55%;
+  top: 0;
+  position: fixed;
+  transition: 0.5s ease;
+ 
+}
+
+.sideWrapopen{
+  z-index: 5;
+  padding: 12px;
+  border-radius: 15px 0 0 15px;
+  background-color: #e7e4e1;
+  height: 100%;
+  width: 25%;
+  right: -55%;
+  top: 0;
+  position: fixed;
+  transition: 0.5s ease;
+
+  right: 0;
+  transition: 0.5s ease;
+  
+}
+
+.sideCloseBtn{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: none;
+  color: red;
+  background-color: transparent;
+  font-size: 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+

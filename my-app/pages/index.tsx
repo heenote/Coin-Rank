@@ -4,13 +4,18 @@ import styles from '../styles/Home.module.css'
 import axios from 'axios'
 import {useEffect, useState} from 'react'
 import { useRouter } from 'next/router'
+import {AiTwotoneStar} from 'react-icons/ai'
+import Interest from './InterestItem/Interest'
 
 export default function Home({data}: any) {
-  const [change, setChange] = useState(false)
+  const [change, setChange] = useState<boolean>(false)
+  const [itemCoin, setItem] = useState<any>([])
   const [tableData, setTableData] = useState(data)
-  const [value, setValue] = useState('')
-  const [TimerM,setTimerM] = useState(4)
-  const [TimerS,setTimerS] = useState(59)
+  const [sqlData, setSqlData] = useState<string[]>([])
+  const [value, setValue] = useState<string>('')
+  const [TimerM,setTimerM] = useState<number>(4)
+  const [TimerS,setTimerS] = useState<number>(59)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
   const router = useRouter();
   /**
    * setInterval로 인해서 5분 주기로 데이터가 바뀜 
@@ -35,7 +40,6 @@ export default function Home({data}: any) {
     .then(res => res.json())
     .then(data =>{ 
       setTableData(data.data.coins) 
-      console.log(data.data.coins)
       setTimerM(5)
      })
      .catch((err: { toString: () => any })=>{
@@ -47,7 +51,6 @@ export default function Home({data}: any) {
   const onSubmit = (e: { preventDefault: () => void; }) =>{
     e.preventDefault();
     const searchData  = data?.filter((item : any)=> item.name == value || item.symbol == value)
-    console.log(searchData)
     if(searchData[0]){
       router.push({
         pathname: `/coinChart/${searchData[0].uuid}`,
@@ -72,7 +75,6 @@ export default function Home({data}: any) {
       }
   }) 
     setTableData(newList)
-    console.log(newList)
   }
 
   // 변화율의 앞자리를 확인해서 color를 바꾸어주는 함수
@@ -82,18 +84,44 @@ export default function Home({data}: any) {
       } else return styles.changeP
   }
 
+  // DB에서 받아온 요쇼로 Staricon의 색을 변경하는 함수
+  const changeiconColor = (id: string) =>{
+     const iconColor = sqlData.filter((item : any) => item.id === id)
+     if(iconColor.length === 0){
+      return styles.star
+     } else return styles.star2
+  }
+  // itemCoin 배열의 요소가 변경될 때마다 실행
+  useEffect(()=>{
+    fetch(`http://localhost:3000/api/get-mysql`)
+    .then(res => res.json())
+    .then(data2 =>{
+      setSqlData(data2)
+    } )
+  },[itemCoin])
+
+  // 파라미터를 DB에 INSERT하는 함수
+  const sql = (data: String) =>{
+    fetch(`http://localhost:3000/api/get-insertDB?data=${data}`)
+    .then(res => res.json())
+  }
+
+  // 햄버거 버튼 오픈 함수
+  const toggleSide = () =>{
+    setIsOpen(true)
+  }
+
+
   return (
 <div className={styles.main}>
     <Head>
         <title>Coin Rank</title>
     </Head>
-    <div>
-      {/** 관심종목 파트 */}
-    </div>
-
+    
+    {/** 헤더 & 변경시간*/}
     <div >
       <div style={{display: 'flex', alignItems:'center'}}>
-     <div style={{}}>
+     <div >
       <span style={{fontSize:'2rem', fontWeight:'bold', color:'darkblue'}} >COIN RANKING TOP100</span>
       <span style={{fontSize:'20px' ,marginLeft:'30px', fontWeight:'lighter'}}>
         { TimerS >= 10 ?
@@ -101,6 +129,16 @@ export default function Home({data}: any) {
         `0${TimerM}:0${TimerS}`
         }
         </span>
+
+      {/* 관심코인*/} 
+      <div>
+      <button onClick={toggleSide}>
+       관심종목
+      </button>
+      <Interest isOpen={isOpen} setIsOpen = {setIsOpen} sqlData = {sqlData}/>
+      </div>
+
+     {/* 검색기능*/}
      </div>
      <div style={{marginLeft:'55%'}}>
      <form onSubmit={onSubmit}>
@@ -117,6 +155,7 @@ export default function Home({data}: any) {
 
     <div>
    
+    {/*코인 테이블 */}
     <table className="table ">
     <thead className={styles.tableHead}>
     <tr>
@@ -132,7 +171,7 @@ export default function Home({data}: any) {
       <th scope="col"></th>
     </tr>
   </thead>
-  <tbody style={{}}>
+  <tbody >
     {tableData.map((item : any, index: number)=>{
       return(
     <tr key={item.uuid} >
@@ -154,21 +193,27 @@ export default function Home({data}: any) {
      { item.change.toString().slice(0,1) === '-' ? 
       `${item.change}%` : `+${item.change}%` } 
       </td>
-      <td scope="row" >
-      <div className={styles.star}>
-      { 
-             
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-star" viewBox="0 0 16 16">
-      <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-      </svg>
       
-      // <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-star-fill" viewBox="0 0 16 16">
-      // <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-      // </svg>
-      }  
+      {/* 관심아이콘 */}
+      <td scope="row" >
+      <div>
+      <AiTwotoneStar 
+      size={18}
+      key={item.uuid}
+      className={changeiconColor(item.uuid)}
+      onClick={()=>{
+        const select = tableData.filter((data: any) => data.uuid === item.uuid)
+        setItem(
+          [select[0].uuid, ...itemCoin]
+          )
+          sql(select[0].uuid) 
+        }}
+      />
       </div>
+      
       </td>
-      <td scope="row" className={styles.symbol} style={{cursor:'pointer'}} onClick={()=>{
+      { /* 그래프 */}
+      <td scope="row" className={styles.grp} onClick={()=>{
       router.push({
         pathname: `/coinChart/${item.uuid}`,
         query:{
@@ -181,7 +226,7 @@ export default function Home({data}: any) {
     }}>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bar-chart" viewBox="0 0 16 16">
        <path d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"/>
-</svg>
+      </svg>
       </td>
     </tr>
       )
