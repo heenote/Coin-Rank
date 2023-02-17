@@ -17,15 +17,12 @@ Show Top100 CoinRank and Chart
 
 |Front-end|Back-end|
 |:---:|:---:|
-|React|Mysql|
-|Next.js|
+|Next.js|Mysql|
 |TypeScript|
 |MUI|
+|Recoil|
 
 ### 2-3 기술 설명
-### React
--
-
 ### Next.js
 -
 
@@ -34,6 +31,8 @@ Show Top100 CoinRank and Chart
 
 ### MUI
 -
+
+### Recoil
 
 ### Mysql
 -
