@@ -7,6 +7,7 @@ Show Top100 CoinRank and Chart
 - API 사용 능력 향상과 실시간으로 데이터를 업데이트하는 나만의 웹 제작
 
 서비스화면
+![image](https://user-images.githubusercontent.com/87384858/219588209-58614c3b-1062-4fd5-843e-e48f9cd8b653.png)
 
 ## 2. 프로젝트 상세
 
