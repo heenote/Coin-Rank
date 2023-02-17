@@ -50,6 +50,8 @@ Show Top100 CoinRank and Chart
 
 ### 차트페이지
 
+### 관심페이지
+
 
 ### 로그인페이지
 ![image](https://user-images.githubusercontent.com/87384858/219588658-adc259c4-c12e-4e8b-83ae-122df754bf39.png)
