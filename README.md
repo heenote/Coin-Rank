@@ -42,11 +42,13 @@ Show Top100 CoinRank and Chart
 
 ## 3. 화면 구성
 ### 시작페이지
-
+![image](https://user-images.githubusercontent.com/87384858/219588209-58614c3b-1062-4fd5-843e-e48f9cd8b653.png)
 
 ### 메인페이지
 
+
 ### 로그인페이지
+
 
 ### 회원가입페이지
 
