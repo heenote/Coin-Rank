@@ -51,6 +51,6 @@ Show Top100 CoinRank and Chart
 ![image](https://user-images.githubusercontent.com/87384858/219588658-adc259c4-c12e-4e8b-83ae-122df754bf39.png)
 
 ### 회원가입페이지
-
+![image](https://user-images.githubusercontent.com/87384858/219589143-87b03fd0-5c32-427b-81c8-f636bf860b62.png)
 
 
