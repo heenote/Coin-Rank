@@ -17,26 +17,32 @@ Show Top100 CoinRank and Chart
 
 |Front-end|Back-end|
 |:---:|:---:|
-|Next.js|Mysql|
+|React|Mysql|
+|Next.js|
 |TypeScript|
 |MUI|
+|Bootstrab|
 |Recoil|
 
 ### 2-3 기술 설명
+### React
+- 다양한 react-hook을 사용한 반응형 웹을 만들기 유용하고 JS 라이브러리 중에서 가장 이해력이 높아서 사용했다.
+
 ### Next.js
--
+- React의 FramWork로 React보다 비교적 편한 라우팅과 API Route를 사용하기 위해서 선택했다
 
 ### TypeScript
--
+- 함수 실행 시, 컴파일 과정에서 실시간으로 타입을 검사하므로 디버깅이 쉽고 안정된 프로그램 작성을 가능하게 하고 
+  협업 진행시 타입을 알려주기 떄문에 타입을 혼동할 일이 줄어들기 때문에 사용했다  
 
 ### MUI
 -
 
 ### Recoil
--
+- 상태관리 라이브러리로 빠르고 유연한 상태관리를 지원하며 한 컴포너트에서 값이 변경되면 모든 컴포넌트에서 변경이 되므로 전역적으로 사용하기 유용하다
 
 ### Mysql
--
+- 팀 프로젝트의 메인 DB로 사용중이며 데이터 조회, 추가, 삭제 기능위주로 사용이 되고 있다.
 
 ### 2-4 추후 일정
 -
