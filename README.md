@@ -13,6 +13,7 @@ Show Top100 CoinRank and Chart
 
 ### 2-1 일정
 2023-01-12 ~ 
+
 ### 2-2 기술
 
 |Front-end|Back-end|
@@ -48,7 +49,7 @@ Show Top100 CoinRank and Chart
 - 팀 프로젝트의 메인 DB로 사용중이며 데이터 조회, 추가, 삭제 기능위주로 사용이 되고 있습니다.
 
 ### 2-4 추후 일정
--
+- 그래프 CSS 부분 변경 및 회원가입 DB연동, 
 
 ## 3. 화면 구성
 ### 시작페이지
