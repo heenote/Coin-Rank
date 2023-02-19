@@ -36,7 +36,10 @@ Show Top100 CoinRank and Chart
   협업 진행시 타입을 알려주기 떄문에 타입을 혼동할 일이 줄어들기 때문에 사용했습니다.
 
 ### MUI
-- 로그인, 회원가입부분을 MUI를 이용하여 디자인을 했습니다.
+- 로그인, 회원가입부분을 MUI를 이용하여 만들었습니다.
+
+### Bootstrab
+- 코인 차트부분을 Bootstrab을 이용하여 만들었습니다.
 
 ### Recoil
 - 상태관리 라이브러리로 빠르고 유연한 상태관리를 지원하며 한 컴포너트에서 값이 변경되면 모든 컴포넌트에서 변경이 되므로 전역적으로 사용하기 유용하여 사용했습니다.
@@ -54,7 +57,7 @@ Show Top100 CoinRank and Chart
 ### 메인페이지
 ![image](https://user-images.githubusercontent.com/87384858/219951358-c7b5ffdd-cc8e-4bbe-bda4-7bd3f51d8c40.png)
 
-### 관심페이지
+### 관심종목
 ![image](https://user-images.githubusercontent.com/87384858/219951386-21242a24-09ec-48d0-9f3e-6fbece3e15bc.png)
 
 ### 차트페이지
