@@ -52,7 +52,7 @@ Show Top100 CoinRank and Chart
 ![image](https://user-images.githubusercontent.com/87384858/219588209-58614c3b-1062-4fd5-843e-e48f9cd8b653.png)
 
 ### 메인페이지
-
+![image](https://user-images.githubusercontent.com/87384858/219951358-c7b5ffdd-cc8e-4bbe-bda4-7bd3f51d8c40.png)
 
 ### 차트페이지
 
