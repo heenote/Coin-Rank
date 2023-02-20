@@ -48,6 +48,8 @@ Show Top100 CoinRank and Chart
 
 ### Mysql
 - 팀 프로젝트의 메인 DB로 사용중이며 데이터 조회, 추가, 삭제 기능위주로 사용이 되고 있습니다.
+- 관심 종목 DB
+- ![image](https://user-images.githubusercontent.com/99184080/220052630-2eba75ab-5934-4884-ba05-489caec748ef.png)
 
 ### 2-4 추후 일정
 - 그래프 CSS 부분 변경 및 회원가입 DB연동 시키기
