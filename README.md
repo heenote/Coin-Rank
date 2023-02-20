@@ -48,7 +48,7 @@ Show Top100 CoinRank and Chart
 
 ### Mysql
 - 팀 프로젝트의 메인 DB로 사용중이며 데이터 조회, 추가, 삭제 기능위주로 사용이 되고 있습니다.
-- 관심 종목 DB로 중복체크만을 위해 고유ID값만을 추가, 삭제, 조회하고 있습니다.
+- 관심 종목 DB로 중복체크만을 위해 고유ID값만을 추가, 삭제, 조회하고 index는 자동증가로 사용하고 있습니다.
 ###
  ![image](https://user-images.githubusercontent.com/99184080/220052630-2eba75ab-5934-4884-ba05-489caec748ef.png)
 
