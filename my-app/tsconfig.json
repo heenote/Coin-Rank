@@ -16,6 +16,6 @@
     "incremental": true,
     "strictNullChecks": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/get-mysql.ts", "pages/api/get-insertDB.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/get-mysql.ts", "pages/api/get-insertDB.ts"],
   "exclude": ["node_modules"]
 }

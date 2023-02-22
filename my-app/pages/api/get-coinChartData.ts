@@ -10,7 +10,6 @@ const options = {
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
     const {uuid} = req.query
    return new Promise<void>((resolve, rejects)=>{
-       
     fetch(`https://coinranking1.p.rapidapi.com/coin/${uuid}/history?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=3h`, options)
        .then(res => res.json())
        .then(data => { res.json(data)
@@ -18,7 +17,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
        .catch(err =>{
            console.error('error:' + err)
-           
            resolve() 
        } 
        )

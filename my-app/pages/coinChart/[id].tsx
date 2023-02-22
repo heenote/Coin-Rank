@@ -4,30 +4,30 @@ import styles from '../../styles/Home.module.css'
 import {useState,useEffect} from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { grap } from '../../interface/TableInterface';
 
 // chart는 CSR에서 그려져야 함 그렇기 떄문에 SSR에서는 동작이 되면 안됨
 // dynamic import로 렌더링 이후에 그래프를 가져옴 그래서 CSR에서 동작이 되는 원리
 const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const ChartPage =({data}: any) => {
+const ChartPage =({data}: {data: grap}) => {
   // X축 데이터 Y축 데이터가 들어갈 변수
   const [XData, setXData] = useState([])
   const [YData, setYData] = useState([])
-
+  const router = useRouter();
   /**
    *  서버에서 오는 data 값이 바뀔 때 동작
    *  타임스탬프를 가시적으로 변경
    *  가격에 소수점 6자리에서 반올림
    */
+  console.log(data)
   useEffect(()=>{
-    setXData(data.history?.map((item: any) => {
+    setXData(data.history?.map((item) => {
       let date = new Date((item.timestamp) * 1000)
       return `${date.getHours()}: ${date.getMinutes()}`
     }))
-    setYData(data.history?.map((item: any) => Number(item.price).toFixed(6)))
+    setYData(data.history?.map((item) => Number(item.price).toFixed(6)))
   },[data])  
-const router = useRouter();
-console.log(data)
 
       return (
         <div>
