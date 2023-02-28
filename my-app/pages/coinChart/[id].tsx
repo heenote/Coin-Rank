@@ -15,6 +15,16 @@ const ChartPage =({data}: {data: grap}) => {
   const [XData, setXData] = useState([])
   const [YData, setYData] = useState([])
   const router = useRouter();
+
+  const newTime = (item :number) =>{
+    let date = new Date((item) * 1000)
+      return `${date.getHours()}: ${date.getMinutes()}`
+  }
+
+  const newDay = (day: number) =>{
+    let date = new Date((day) * 1000)
+    return date
+  }
   /**
    *  서버에서 오는 data 값이 바뀔 때 동작
    *  타임스탬프를 가시적으로 변경
@@ -22,33 +32,28 @@ const ChartPage =({data}: {data: grap}) => {
    */
   console.log(data)
   useEffect(()=>{
-    setXData(data.history?.map((item) => {
-      let date = new Date((item.timestamp) * 1000)
-      return `${date.getHours()}: ${date.getMinutes()}`
-    }))
-    setYData(data.history?.map((item) => Number(item.price).toFixed(6)))
+    setXData(data.history?.map((item) => newTime(item.timestamp)))
+    setYData(data.history?.map((item) => Number(item.price).toFixed(2)))
   },[data])  
 
       return (
-        <div>
+        <div style={{margin: '40px 110px 0 90px'}}>
           <div style={{display: 'flex' ,marginBottom:'10px'}}>
             <div>
               <Image
                src = {`${router.query.img}`}
                alt='image'
-               width={30}
-               height={30}
+               width={50}
+               height={50}
               />
             </div>
-            <div style={{width:'20%'}}>
-          <span style={{ fontWeight:'bold', fontSize:'1.2rem'}}>{router.query.name}</span>
+            <div style={{width:'50%', paddingLeft:'10px'}}>
+          <span style={{ fontWeight:'bold', fontSize:'2.2rem' , paddingRight:'5px'}}>{router.query.name}</span>
+          <span style={{ fontWeight:'bold' }}>{Number(router.query.price).toFixed(2)}</span>
+          <span style={{fontSize:'0.7rem',fontWeight:'bold'}}>USD</span>
+          <p style={{color:'gray', fontSize:'0.6rem'}}>{`${newDay(data.history[0].timestamp)}`}</p>
             </div>
-          <div style={{marginTop: '10px', display: 'flex', marginLeft: '30%'}}>
-            <button className={styles.timeChageButton}>3h</button>
-            <button className={styles.timeChageButton}>24h</button>
-            <button className={styles.timeChageButton}>7D</button>   
-            <button className={styles.ChageGrpButton}>CoinList</button>   
-           </div>
+     
           </div>
           <div>
             {/**
@@ -56,18 +61,35 @@ const ChartPage =({data}: {data: grap}) => {
              */}
           <ApexCharts
           options={{ //data on the x-axis
-          chart: { id: 'bar-chart'},
+          chart: {
+            type: 'line',
+            stacked: false,
+            zoom: {
+              type: 'x',
+              enabled: true,
+              autoScaleYaxis: true
+            },
+            toolbar: {
+              autoSelected: 'zoom'
+            }
+          },
           xaxis: {
           categories: XData.reverse(),
-          tickAmount: 30 ,
+          tickAmount: 35 ,
+          title: {
+            text: 'Three-Hour-time Cycle '
+          },
           labels:{
             hideOverlappingLabels: true
           }
           },
-          theme:{
-            mode: "dark"
+          stroke: {
+            width: 3
           },
-          colors:['#0fbcf9'],
+          title: {
+            text: 'Stock Price Movement',
+            align: 'left'
+          },
           
           dataLabels: {
             enabled: false
@@ -75,16 +97,12 @@ const ChartPage =({data}: {data: grap}) => {
           markers:{
             size: 0,
           },
-        
-          fill:{
-            type: 'gradient',
-            gradient:{
-              shadeIntensity: 1,
-              opacityFrom: 0.7,
-              opacityTo: 0.9,
-              stops:[0,100]
-            }
-          }
+         
+          yaxis: {
+            title: {
+              text: 'Price'
+            },
+          },
           
           }}
         series={[ //data on the y-axis
@@ -94,9 +112,8 @@ const ChartPage =({data}: {data: grap}) => {
           
         }
         ]}
-        type="area"
         width="1300"
-        height="450"
+        height="550"
           />
           </div>
           </div>

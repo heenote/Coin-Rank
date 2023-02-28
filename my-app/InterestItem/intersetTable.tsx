@@ -1,8 +1,9 @@
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 import {coinTable} from '../interface/TableInterface'
 export default function Card({ary}: {ary: coinTable}){
-  
+  const router = useRouter()
   const percentChange = (data: string) =>{
     if(data.toString().slice(0,1) === '-'){
       return styles.changeM
@@ -10,8 +11,17 @@ export default function Card({ary}: {ary: coinTable}){
 }
     return(
         <>
-        
-        <div className="card" style={{marginBottom:'10px'}}>
+        <div className="card" style={{marginBottom:'10px'}} onClick={()=>{
+           router.push({
+            pathname: `/coinChart/${ary.uuid}`,
+            query:{
+              uuid:ary.uuid,
+              name: ary.name,
+              img: ary.iconUrl,
+              price: ary.price,
+            }
+          })
+        }}>
        <div className="card-header">
         <b>{ary.name}</b>
        </div>

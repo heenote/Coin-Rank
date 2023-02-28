@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
-import {useEffect, useState} from 'react'
+import {useEffect, useState, useCallback} from 'react'
 import { useRouter } from 'next/router'
 import {AiTwotoneStar} from 'react-icons/ai'
 import {Data} from '../interface/atom'
@@ -88,12 +88,13 @@ export default function Home({data} : {data: coinTable}) {
   }
 
   // DB에서 받아온 요쇼로 Staricon의 색을 변경하는 함수
-  const changeiconColor = (id: string) =>{
+  const changeiconColor = useCallback( (id: string) =>{
      const iconColor = sqlData.filter((item :global) => item.id === id)
      if(iconColor.length === 0){
       return styles.star
      } else return styles.star2
-  }
+  } ,[sqlData])
+  
   // itemCoin 배열의 요소가 변경될 때마다 실행
   useEffect(()=>{
     async function fetchDB(){
@@ -104,7 +105,6 @@ export default function Home({data} : {data: coinTable}) {
       } )
     }
     fetchDB()
-    console.log(data)
   },[itemCoin])
 
   // 파라미터를 DB에 INSERT하는 함수
@@ -117,7 +117,6 @@ export default function Home({data} : {data: coinTable}) {
   const toggleSide = () =>{
     setIsOpen(true)
   }
-
 
   return (
 <div className={styles.coinmain}>
@@ -137,14 +136,9 @@ export default function Home({data} : {data: coinTable}) {
         }
         </span>
 
-      {/* 관심코인*/} 
-      <div>
-      
-      </div>
-
      {/* 검색기능*/}
      </div>
-     <div style={{marginLeft:'55%'}}>
+     <div style={{marginLeft:'60%'}}>
      <form onSubmit={onSubmit}>
      <input 
       type='text'
@@ -156,7 +150,6 @@ export default function Home({data} : {data: coinTable}) {
       </div>
       </div>
     </div>
-
     <div>
    
     {/*코인 테이블 */}
@@ -172,14 +165,15 @@ export default function Home({data} : {data: coinTable}) {
       <th scope="col">거래량(24h)</th>
       <th scope="col"  onClick={changeUpDown} style={{cursor:'pointer'}}>변동(24h) </th>
       <th colSpan ="2" onClick={toggleSide} style={{cursor:'pointer'}}>
+    {/* 관심종목 */}
        <button className={styles.intersBtn}>관심종목</button>
       { 
         <Interest isOpen={isOpen} setIsOpen = {setIsOpen} sqlData = {sqlData} tableData = {tableData}/>
       }</th>
       <th></th>
-    </tr>
-  </thead>
-  <tbody >
+      </tr>
+      </thead>
+     <tbody >
     {tableData.map((item : coinTable, index: number)=>{
       return(
     <tr key={item.uuid} >
@@ -227,7 +221,8 @@ export default function Home({data} : {data: coinTable}) {
         query:{
           uuid:item.uuid,
           name: item.name,
-          img: item.iconUrl
+          img: item.iconUrl,
+          price: item.price,
         }
       })
       
