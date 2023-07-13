@@ -22,7 +22,7 @@
 }
 
 .volume{
-  font-weight: lighter;
+  font-weight: bold;
 }
 
 .changeP{
@@ -125,16 +125,6 @@
   
 }
 
-.sideCloseBtn{
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  border: none;
-  color: red;
-  background-color: transparent;
-  font-size: 20px;
-  cursor: pointer;
-}
 
 .intersBtn{
   border: solid 2px blue;
@@ -272,16 +262,6 @@
   position: relative;
   bottom: 8px;
   right: 109px;
-}
-
-.signupac{
-  all: unset;
-  background-color: navy;
-  color: #fff;
-  width: 100px;
-  height: 40px;
-  text-align: center;
-  font-size: 1.1em;
 }
 
 .btn2:hover:before,.btn2:hover:after{

@@ -18,6 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
        .catch(err =>{
            console.error('error:' + err)
+           res.json('error')
            resolve() 
        } 
        )

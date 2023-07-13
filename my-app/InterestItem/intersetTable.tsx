@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css'
 import Image from 'next/image'
+import img from '../public/favicon.ico'
 import { useRouter } from 'next/router'
 import {coinTable} from '../interface/TableInterface'
 export default function Card({ary}: {ary: coinTable}){
@@ -11,7 +12,7 @@ export default function Card({ary}: {ary: coinTable}){
 }
     return(
         <>
-        <div className="card" style={{marginBottom:'10px'}} onClick={()=>{
+        <div className="card" style={{marginBottom:'10px', cursor:'pointer'}} onClick={()=>{
            router.push({
             pathname: `/coinChart/${ary.uuid}`,
             query:{
@@ -27,12 +28,24 @@ export default function Card({ary}: {ary: coinTable}){
        </div>
        <div className="card-body">
        <div style={{display: 'flex', padding: '10px'}}>
-       <Image
+       { 
+         ary.iconUrl.toString().slice(-3) == 'svg' ||  
+         ary.iconUrl.toString().slice(-3) =='png' ||
+         ary.iconUrl.toString().slice(-3) =='PNG' ?
+          <Image
              src ={`${ary.iconUrl}`}
              alt='coinMark'
              height={60}
              width={60}
-            />
+             />
+             :
+             <Image
+             src ={img}
+             alt='coinMark'
+             height={60}
+             width={60}
+             />
+            }
          <div style={{marginLeft: '40px'}}>
          <p className="card-text">가격: ${Number(ary.price).toFixed(2)} </p>
          <p className={percentChange(ary.change)}>변동: 

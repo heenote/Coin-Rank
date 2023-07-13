@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
+import img from '../public/favicon.ico'
 import {useEffect, useState, useCallback} from 'react'
 import { useRouter } from 'next/router'
 import {AiTwotoneStar} from 'react-icons/ai'
@@ -117,6 +118,25 @@ export default function Home({data} : {data: coinTable}) {
   const toggleSide = () =>{
     setIsOpen(true)
   }
+  
+  // 숫자를 KRW 단위로 간결하게 나타내는 함수
+  const numberIntl = (item : number) =>{
+     let formatter = new Intl.NumberFormat('ko-KR', {
+      notation:'compact',
+      compactDisplay:'long'
+     })
+     return formatter.format(item)
+  }
+
+  // 가격을 usd 단위로 간결하게 나타내는 함수
+  const priceIntl = (item : number) =>{
+    let formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'usd'
+    })
+    return formatter.format(item)
+  }
+
 
   return (
 <div className={styles.coinmain}>
@@ -125,7 +145,7 @@ export default function Home({data} : {data: coinTable}) {
     </Head>
     
     {/** 헤더 & 변경시간*/}
-    <div >
+    <div style={{position:'relative'}}>
       <div style={{display: 'flex', flexDirection:'row' ,alignItems:'center'}}>
      <div >
       <span style={{fontSize:'1.5rem', fontWeight:'bold', color:'darkblue'}} >COIN RANKING TOP100</span>
@@ -136,9 +156,9 @@ export default function Home({data} : {data: coinTable}) {
         }
         </span>
 
-     {/* 검색기능*/}
      </div>
-     <div style={{marginLeft:'60%'}}>
+     {/* 검색기능*/}
+     <div style={{position:'absolute', right:'0'}}>
      <form onSubmit={onSubmit}>
      <input 
       type='text'
@@ -164,7 +184,7 @@ export default function Home({data} : {data: coinTable}) {
       <th scope="col">총 시가</th>
       <th scope="col">거래량(24h)</th>
       <th scope="col"  onClick={changeUpDown} style={{cursor:'pointer'}}>변동(24h) </th>
-      <th colSpan ="2" onClick={toggleSide} style={{cursor:'pointer'}}>
+      <th colSpan = {2} onClick={toggleSide}>
     {/* 관심종목 */}
        <button className={styles.intersBtn}>관심종목</button>
       { 
@@ -179,18 +199,36 @@ export default function Home({data} : {data: coinTable}) {
     <tr key={item.uuid} >
       <td scope="row" width={20} style={{fontWeight:'bold'}}>{index+1}</td>
       <td scope="row" width={20} >
-         <Image
+        { 
+         item.iconUrl.toString().slice(-3) == 'svg' ||  
+         item.iconUrl.toString().slice(-3) =='png' ||
+         item.iconUrl.toString().slice(-3) =='PNG' ?
+          <Image
              src ={`${item.iconUrl}`}
              alt='coinMark'
              height={30}
              width={30}
-            />
+             />
+             :
+             <Image
+             src ={img}
+             alt='coinMark'
+             height={30}
+             width={30}
+             />
+            }
       </td>
-      <td scope="row" className="col-sm-2" style={{fontWeight:'lighter', fontSize:'20px', color:`${item.color}`}}>{item.name}</td>
+      {/*종목*/}
+      <td scope="row" className="col-sm-2" style={{fontWeight:'lighter', fontSize:'20px', color:`${item.color}`}}>{item.name}</td> 
+      {/*기호*/}
       <td scope="row" className={styles.symbol}>{item.symbol}</td>
-      <td scope="row" className={styles.price}>${Number(item.price).toFixed(2)} </td>
-      <td scope="row" className={styles.volume}>{ Number(item.marketCap) / 10000000000}</td>
-      <td scope="row" className={styles.volume}>{item['24hVolume']}</td>
+      {/*가격*/}
+      <td scope="row" className={styles.price}>{priceIntl(Number(item.price))} </td>
+      {/*총 시가*/}
+      <td scope="row" className={styles.volume}>{numberIntl(Number(item.marketCap))}</td>
+      {/*거래량*/}
+      <td scope="row" className={styles.volume}>{numberIntl(Number(item['24hVolume']))}</td>
+      {/*변동*/}
       <td scope="row" className={percentChange(item.change)}> 
      { item.change.toString().slice(0,1) === '-' ? 
       `${item.change}%` : `+${item.change}%` } 

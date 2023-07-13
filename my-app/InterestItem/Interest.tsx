@@ -22,6 +22,7 @@ export default function Interest({ isOpen, setIsOpen, sqlData, tableData }: { is
     console.log(ary)
   },[sqlData])
 
+  // 관심종목 사이드바를 닫아주는 함수
   const handlerOutsie = (e: { target: any; }) => {
     if (!outside.current.contains(e.target)) {
       toggleSide();
@@ -30,9 +31,7 @@ export default function Interest({ isOpen, setIsOpen, sqlData, tableData }: { is
   return (
     <>
     <div id="sidebar" ref={outside} className={isOpen ? styles.sideWrapopen : styles.sideWrap}>
-       <div className={styles.sideCloseBtn} onClick ={toggleSide}>
-        X
-       </div>
+       
        <div style={{marginTop:'40px'}}>
         {
           ary.map((item)=>{

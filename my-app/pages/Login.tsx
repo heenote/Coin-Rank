@@ -28,7 +28,6 @@ function Copyright(props: any) {
 
 export default function Login(){
     const router = useRouter()
-    const [signPage, setSignPage] = useState(false);
 
     const ClickSignUp = () => {
         router.push('./Signup')
@@ -86,15 +85,15 @@ export default function Login(){
                                     color="warning"
                                     sx={{ mt: 2, mb: 2 }}
                                     >로그인</Button>
-                                
-                            <Grid container>
-                                <Grid item xs>
-                                    
-                                </Grid>
-                                <Grid item>
-                                    <button className={styles.signupac} onClick={ClickSignUp}>회원가입</button>
-                                </Grid>
-                            </Grid>
+
+                                    <Button 
+                                    type="submit" 
+                                    fullWidth
+                                    variant="contained"
+                                    color="warning"
+                                    sx={{ mt: 2, mb: 2 }}
+                                    onClick={ClickSignUp}
+                                    >회원가입</Button>
                         </Box>
                     <Copyright sx={{ mt: 8, mb: 4 }} />
                 </Container>

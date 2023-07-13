@@ -30,19 +30,17 @@ function Copyright(props: any) {
 
 export default function SignUp() {
     const router = useRouter()
-    const theme = createTheme();
+    const theme = createTheme(); 
 
     const [check, setCheck] = useState(false);
-    const [emailError, setEmailError] = useState('');
-    const [passwordNew, setPaswordNew] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [nameError, setNameError] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPasword] = useState('');
+    const [name, setName] = useState('');
 
     let collectData: {
       email: string|null;
       name: string;
       password: string;
-      rePassword: string;
     } 
     
     const handleSubmit = (e:any) => { // form 전송
@@ -63,8 +61,6 @@ export default function SignUp() {
     //   rePassword: data.get('rePassword'),
     // };
 
-    const {email, name, password, rePassword} = collectData;
-
     const emailRegex = /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
     // if (!emailRegex.test(email)) {
     //   setEmailError('올바른 이메일 형식이 아닙니다.');
@@ -73,7 +69,28 @@ export default function SignUp() {
     // }
 
     } 
+
+
+    const InsertDB = (data: any) =>{
+      fetch(`http://localhost:3000/api/get-userInfoInsert?data=${data}`)
+    .then(res => res.json())
+    }
+
     
+    const namehandle = (e : any) =>{
+       setName(e.target.value)
+    }
+
+        
+    const passhandle = (e : any) =>{
+      setPasword(e.target.value)
+    }
+
+       
+   const emailhandle = (e : any) =>{
+    setEmail(e.target.value)
+   }
+
     const handleAgree = (event:any) => { // 동의 체크
       setCheck(event.target.check);
     } 
@@ -102,6 +119,8 @@ export default function SignUp() {
             <Grid container spacing={2}>
             <Grid item xs={12}>
                 <TextField
+                  onChange={namehandle}
+                  value = {name}
                   required
                   fullWidth
                   name="name"
@@ -112,37 +131,29 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
+                  onChange={passhandle}
+                  value = {email}
                   name="email"
                   required
                   fullWidth
                   id="email"
                   label="아이디"
-                  type="email"
+                  type="text"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  onChange={emailhandle}
+                  value = {password}  
                   required
                   fullWidth
                   id="password"
                   label="비밀번호"
                   name="password"
-                  autoComplete="family-name"
                   type="password"
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="rePassword"
-                  label="비밀번호 재입력"
-                  name="rePassword"
-                  autoComplete="family-name"
-                  type="password"
-                />
-              </Grid>
+              
               <Grid item xs={12}>
                 <FormControlLabel
                   control={<Checkbox onChange={handleAgree} color="primary" />}
@@ -157,6 +168,8 @@ export default function SignUp() {
               color="warning"
               sx={{ mt: 2, mb: 2 }}
               onClick={()=>{
+                const totalData = {email: email, name: name, password: password}
+                InsertDB(totalData)
                 router.push('./Login')
               }}
             >
