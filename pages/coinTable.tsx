@@ -139,7 +139,7 @@ export default function Home({data} : {data: coinTable}) {
 
 
   return (
-<div className={styles.coinmain}>
+   <div className={styles.coinmain}>
     <Head>
         <title>Coin Rank</title>
     </Head>
@@ -177,7 +177,7 @@ export default function Home({data} : {data: coinTable}) {
     <thead className={styles.tableHead}>
     <tr>
       <th scope="col">Rank</th>
-      <th scope="col"></th>
+      <th scope="col"></th> 
       <th scope="col">종목</th>
       <th scope="col">기호</th>
       <th scope="col">가격</th>
