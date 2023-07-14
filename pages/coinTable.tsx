@@ -14,10 +14,10 @@ import Interest from '../InterestItem/Interest'
 export default function Home({data} : {data: coinTable}) {
   const [change, setChange] = useState<boolean>(false)
   const [itemCoin, setItem] = useState([])
-  const [tableData, setTableData] = useState<coinTable>(data)
+  const [tableData, setTableData] = useState<coinTable>(data) //
   const [value, setValue] = useState<string>('')
-  const [TimerM,setTimerM] = useState<number>(4)
-  const [TimerS,setTimerS] = useState<number>(59)
+  const [TimerM,setTimerM] = useState<number>(4) //
+  const [TimerS,setTimerS] = useState<number>(59) // 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [sqlData, setSqlData] = useRecoilState<global[]>(Data)
   const router = useRouter();
@@ -188,7 +188,7 @@ export default function Home({data} : {data: coinTable}) {
     {/* 관심종목 */}
        <button className={styles.intersBtn}>관심종목</button>
       { 
-        <Interest isOpen={isOpen} setIsOpen = {setIsOpen} sqlData = {sqlData} tableData = {tableData}/>
+        <Interest isOpen={isOpen} setIsOpen = {setIsOpen}  tableData = {tableData}/>
       }</th>
       <th></th>
       </tr>
