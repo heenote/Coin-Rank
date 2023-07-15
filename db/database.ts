@@ -1,7 +1,6 @@
 export {};
 const mysql = require("mysql2");
 let db;
-require('dotenv').config();
 try {
     db = mysql.createConnection({
     host: 'localhost',
