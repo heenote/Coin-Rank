@@ -6,7 +6,7 @@ try {
     host: 'localhost',
     port:'3306',
     user:'root',
-    password: process.env.MYSQL_PW,
+    password: process.env.NEXT_PUBLIC_MYSQL_PW,
     database:'coin'
 });
 } catch (err) {
