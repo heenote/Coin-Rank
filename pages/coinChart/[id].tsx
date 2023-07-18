@@ -1,5 +1,4 @@
 import dynamic from 'next/dynamic'
-import axios from 'axios';
 import { HydrationProvider, Client } from 'react-hydration-provider';
 import {useState,useEffect} from 'react'
 import Image from 'next/image';
@@ -157,11 +156,19 @@ const ChartPage =({data}: {data: grap}) => {
  */
 export async function getServerSideProps({query}: any) {
     const {uuid} = query
-    const res = await axios(`http://localhost:3000/api/get-coinChartData?uuid=${uuid}`,  {responseType: 'json'})
-    const data = res.data.data
+    const options = {
+      method: 'GET',
+      headers: {
+        'X-RapidAPI-Key': `${process.env.NEXT_PUBLIC_API_KEY}`,
+        'X-RapidAPI-Host': `${process.env.NEXT_PUBLIC_API_LINK}`
+      }
+    };
+    const res = await fetch(`https://coinranking1.p.rapidapi.com/coin/${uuid}/history?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=3h`, options)
+    const result = await res.json()
+    
     return{
         props:{
-          data,
+          data: result.data
         }
     }
 }

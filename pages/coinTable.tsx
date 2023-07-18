@@ -281,12 +281,23 @@ export default function Home({data} : {data: coinTable}) {
 }
 
 // 주기적으로 업데이트가 되어야 하기 때문에 getServerSideProps 사용 
+// Api Route를 사용해서 호출하면 불필요하게 데이터가 2번 호출이 되어서 바로 api에 접근하였다
 export async function getServerSideProps(){
-  const res = await axios(`http://localhost:3000/api/get-coindata`,  {responseType: 'json'})
-  const data = res.data.data.coins
+  const url = 'https://coinranking1.p.rapidapi.com/coins?referenceCurrencyUuid=yhjMzLPhuIDl&timePeriod=24h&tiers%5B0%5D=1&orderBy=marketCap&orderDirection=desc&limit=100&offset=0';
+  const options = {
+  method: 'GET',
+  headers: {
+    'X-RapidAPI-Key': `${process.env.NEXT_PUBLIC_API_KEY}`,
+    'X-RapidAPI-Host': `${process.env.NEXT_PUBLIC_API_LINK}`
+  }
+
+  }
+  const res = await fetch(url, options)
+  const result = await res.json()
+        
   return{
       props:{
-        data,
+        data : result.data.coins
       }
   }
 }
