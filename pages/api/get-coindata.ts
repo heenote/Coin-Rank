@@ -4,8 +4,8 @@ const url = 'https://coinranking1.p.rapidapi.com/coins?referenceCurrencyUuid=yhj
 const options = {
   method: 'GET',
   headers: {
-    'X-RapidAPI-Key': process.env.NEXT_PUBLIC_API_KEY,
-    'X-RapidAPI-Host': process.env.NEXT_PUBLIC_API_LINK
+    'X-RapidAPI-Key': 'ffce325afdmsh9e248ab07376ee9p1a9a7bjsn226c76f00513',
+    'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
   }
 };
 export default async function handler(req: NextApiRequest, res: NextApiResponse){
