@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import axios from 'axios'
 import img from '../public/favicon.ico'
 import {useEffect, useState, useCallback} from 'react'
 import { useRouter } from 'next/router'
@@ -40,7 +39,7 @@ export default function Home({data} : {data: coinTable}) {
   },[TimerM, TimerS])
 
   if(TimerM === 0 && TimerS === 2){
-    fetch(`http://localhost:3000/api/get-coindata`)  //5분 주기로 업데이트
+    fetch(`/api/get-coindata`)  //5분 주기로 업데이트
     .then(res => res.json())
     .then(data =>{ 
       setTableData(data.data.coins) 
@@ -99,7 +98,7 @@ export default function Home({data} : {data: coinTable}) {
   // itemCoin 배열의 요소가 변경될 때마다 실행
   useEffect(()=>{
     async function fetchDB(){
-    await fetch(`http://localhost:3000/api/get-mysql`)
+    await fetch(`/api/get-mysql`)
       .then(res => res.json())
       .then(data2 =>{
         setSqlData(data2)
@@ -110,7 +109,7 @@ export default function Home({data} : {data: coinTable}) {
 
   // 파라미터를 DB에 INSERT하는 함수
   const sql = (data: String) =>{
-    fetch(`http://localhost:3000/api/get-insertDB?data=${data}`)
+    fetch(`/api/get-insertDB?data=${data}`)
     .then(res => res.json())
   }
 
