@@ -44,6 +44,7 @@ export default function Home({data} : {data: coinTable}) {
     .then(data =>{ 
       setTableData(data.data.coins) 
       setTimerM(5)
+      setTimerS(0)
      })
      .catch((err: { toString: () => string })=>{
        console.log(err.toString()) 
@@ -242,10 +243,10 @@ export default function Home({data} : {data: coinTable}) {
       className={changeiconColor(item.uuid)}
       onClick={()=>{
         const select = tableData.filter((data: coinTable) => data.uuid === item.uuid)
+        sql(select[0].uuid) 
         setItem(
           [select, ...itemCoin]
           )
-          sql(select[0].uuid) 
         }}
       />
       </div>
